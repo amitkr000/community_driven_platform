@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        *{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header{
+            text-align: center;
+            padding: .5rem;
+            color: #387F39;
+        }
+
+        .header h1{
+            margin: .5rem 0.2rem 0 0;
+        }
+
+        .header p{
+            margin-bottom: 1rem;
+        }
+
+        .navbar{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .navbar div{
+            padding: .5rem;
+            background-color: white;
+            color: black;
+        }
+
+        .navbar div.active{
+            background-color: #F6E96B;
+            border-radius: .5rem;
+        }
+
+        .navbar div p{
+            text-decoration: none;
+            font-size: 1.75rem;
+            padding: 0 2rem;
+            color: black;
+        }
+
+        .main{
+            margin: 1rem 2rem;
+        }
+
+        .main #exploreSection .searchbar{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main #exploreSection .searchbar select{
+            padding: .5rem;
+            width: 20%;
+            font-size: 1rem;
+            background-color: #387F39;
+            color: white;
+            border: none;
+            border-radius: .2rem;
+            cursor: pointer;
+        }
+
+        .main #exploreSection .searchbar input{
+            padding: .5rem;
+            font-size: 1rem;
+            margin: 0 1rem;
+            width: 100%;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+        }
+
+        .main #exploreSection .searchbar button{
+            padding: .5rem;
+            width: 20%;
+            font-size: 1rem;
+            background-color: #387F39;
+            color: white;
+            border: none;
+            border-radius: .2rem;
+            cursor: pointer;
+        }
+
+        .main #exploreSection .searchbar button:hover{
+            background-color: #F6E96B;
+            color: black;
+        }
+
+        .main #exploreSection #exploreResults{
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .book-card {
+            width: 100%;
+            max-width: 1000px;
+            background-color: #fff;
+            border-radius: .5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .book-card .book-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .book-card .card-content {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .left-side {
+            text-align: center;
+        }
+
+        .book-image {
+            width: 10rem;
+            height: auto;
+            border-radius: 1rem;
+        }
+
+        .rating {
+            margin-top: .8rem;
+            font-size: 1.25rem;
+        }
+
+        .right-side {
+            width: 100%;
+            text-align: left;
+        }
+
+        .description {
+            font-size: 1rem;
+            margin-bottom: .8rem;
+        }
+
+        .author,
+        .category,.publisher, .published_date {
+            font-size: 1rem;
+            margin-bottom: .5rem;
+        }
+
+        .interaction-buttons {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .book-card .card-content .right-side .interaction-buttons button {
+            background-color:#387F39;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            flex: 1;
+            margin: 0 4px;
+        }
+
+        .book-card .card-content .right-side .interaction-buttons button:hover {
+            background-color: #A2CA71;
+        }
+
+        #load-btn{
+            text-align: center;
+            display: none;
+        }
+
+        #load-btn button{
+            padding: .5rem 1rem;
+            font-size: 1rem;
+            border-radius: .2rem;
+            background-color: #387F39;
+            color: #fff;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>Community driven platform</h1>
+        <p>Place to share and explore book recommendations</p>
+    </header>
+
+
+    <nav class="navbar">
+        <div id="exploreLink" class="active">
+            <p>Explore</p>
+        </div>
+        <div id="recommendationLink">
+            <p>Recommendation</p>
+        </div> 
+    </nav>
+
+
+    <main class="main">
+        <!-- Explore Section -->
+        <div id="exploreSection" class="section">
+            <!-- Search bar container -->
+            <div class="searchbar">
+                <select id="optionselect">
+                    <option value="">All</option>
+                    <option value="intitle">Title</option>
+                    <option value="inauthor">Author</option>
+                    <option value="subject">Category</option>
+                    <option value="inpublisher">Publisher</option>
+                </select>
+                <input type="text" id="searchInput" placeholder="Search...">
+                <button id="searchBtn">Search</button>
+            </div>
+
+            <!-- Books List Container -->
+            <div id="exploreResults">
+
+            </div>
+
+            <div id="load-btn" class="load-btn">
+                <button>Load</button>
+            </div>
+        </div>
+    
+        <!-- Recommendation Section -->
+        <div id="recommendationSection" class="section">
+            <div id="recommendationResults"></div>
+        </div>
+    </main>
+
+    <script>
+    let startindex = 0;
+    // jQuery Code Goes Here
+    $(document).ready(function(){
+
+        // Function to show the appropriate section
+        function showSection(section, id) {
+            $('.section').hide(); // Hide all sections
+            $('.navbar div').removeClass('active');
+            $(`#${section}`).show(); // Show the selected section
+            $(`${id}`).addClass('active');
+        }
+
+        // Event handler for the Explore link
+        $('#exploreLink').click(function(){
+            showSection('exploreSection', '#exploreLink');
+        });
+
+        // Event handler for the Recommendation link
+        $('#recommendationLink').click(function(){
+            showSection('recommendationSection', '#recommendationLink');
+            //fetchRecommendations(); // Fetch recommendations when this section is selected
+        });
+
+        //Event handler for load
+        $('#load-btn').click(function(){
+            startindex += 10;
+            let query = '';
+            const search = $('#searchInput').val();
+            let term = $('#optionselect').val();
+            if (term != ''){
+                query = `${term}:${search}`;
+            }
+            else{
+                query = search;
+            }
+            fetchExploreData(query, startindex, 'load'); // Fetch explore data based on the query
+        }
+        )
+
+        // Event handler for the search button
+        $('#searchBtn').click(function(){
+            let query = '';
+            const search = $('#searchInput').val();
+            let term = $('#optionselect').val();
+            if (term != ''){
+                query = `${term}:${search}`;
+            }
+            else{
+                query = search;
+            }
+            let startindex = 0;
+            fetchExploreData(query, startindex, 'new-search'); // Fetch explore data based on the query
+        });
+
+         // Function to fetch explore data from the server
+        function fetchExploreData(query, startindex, action) {
+            $.ajax({
+            url: '/api/books/search/', // Replace with your server endpoint
+            method: 'GET',
+            data: { q: query, i: startindex },
+            success: function(data) {
+                var results = ''
+                if (action == "new-search"){
+                    $('#exploreResults').empty(); // Clear previous results
+                    results = '<h2>Search Results:</h2>';
+                }
+
+                        data.forEach(function(book) {
+                            // results += '<div class="book-card">';
+                            // results += '<h3>' + book.title + '</h3>';
+                            // results += '<p>Authors: ' + book.authors.join(', ') + '</p>';
+                            // results += '<p>' + book.description + '</p>';
+                            // if (book.cover_image) {
+                            //     results += '<img src="' + book.cover_image + '" alt="Cover Image">';
+                            // }
+                            // results += '<p>Category: ' + book.categories + '</p>';
+                            // results += '<p>Publisher: ' + book.publisher + '</p>';
+                            // results += '<p>Rating: ' + book.ratings + '</p>';
+                            // results += '<p>Published Date: ' + book.published_date + '</p>';
+                            // results += '</div>';
+                            // results += '</div>';
+
+                            results += `
+                            <div class="book-card">
+                                <h2 class="book-title">${book.title}</h2>
+                                <div class="card-content">
+                                    <div class="left-side">
+                                        <img src=${book.cover_image ? book.cover_image : "https://via.placeholder.com/160"} alt="Book Cover" class="book-image">
+                                        <p class="rating">Rating: ${book.rating}</p>
+                                    </div>
+
+                                    <div class="right-side">
+                                        <p class="description">${book.description}</p>
+                                        <p class="author">Author: ${book.authors.join(', ')}</p>
+                                        <p class="category">Category: ${book.categories.join(', ')}</p>
+                                        <p class="publisher">Publisher: ${book.publisher}</p>
+                                        <p class="published_date">Published Date: ${book.published_date}</p>
+                                        <div class="interaction-buttons">
+                                            <button class="like-btn">Like</button>
+                                            <button class="comment-btn">Comment</button>
+                                            <button class="recommend-btn">Recommend</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `
+                        });
+                        $('#exploreResults').append(results);
+                        $('#load-btn').show();
+            },
+            error: function() {
+                $('#results').html('<p>An error occurred while fetching data.</p>');
+            }
+            });
+        }
+
+    });
+    </script>
+
+</body>
+</html>
