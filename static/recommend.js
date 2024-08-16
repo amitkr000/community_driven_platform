@@ -3,6 +3,7 @@ $(document).ready(function() {
         // Get the specific book
         var card = $(this).closest('.book-card');
 
+        const id = card.data('id');
         const title = card.find('.book-title').text();
         const author = card.find('.author span').text();
         const description = card.find('.description').text();
@@ -12,6 +13,7 @@ $(document).ready(function() {
         const cover_image = card.find('.book-image').attr('src');
 
         var data = {
+            id: id,
             title: title,
             author: author,
             description: description,

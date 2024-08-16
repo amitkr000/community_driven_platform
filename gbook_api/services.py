@@ -44,6 +44,7 @@ def process_book_data(raw_data):
             continue
 
         book = {
+            'id': item.get('id', ""),
             'title': volume_info.get('title', 'No Title'),
             'authors': volume_info.get('authors', ['Unknown Author']),
             'description': volume_info.get('description', 'No Description'),

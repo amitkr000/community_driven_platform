@@ -48,7 +48,7 @@ $(document).ready(function(){
 
                     data.forEach(function(book) {
                         results += `
-                        <div class="book-card">
+                        <div class="book-card" data-id="${book.id}">
                             <h2 class="book-title">${book.title}</h2>
                             <div class="card-content">
                                 <div class="left-side">
