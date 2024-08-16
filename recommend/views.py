@@ -1,4 +1,6 @@
 from rest_framework import generics, status
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 from rest_framework.response import Response
 from .models import BookRecommendation, Like, Comment
 from .serializers import BookRecommendationSerializer, LikeSerializer, CommentSerializer
@@ -20,12 +22,24 @@ class BookRecommendationListCreateView(generics.ListCreateAPIView):
 # For Retriving book data from database
 class BookRecommendationListView(generics.ListAPIView):
     serializer_class = BookRecommendationSerializer
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filterset_fields = ['genre', 'rating', 'publication_date']
+    ordering_fields = ['title', 'author', 'rating', 'publication_date']
 
     def get_queryset(self):
-        number_of_books = self.request.query_params.get('limit', None)
         queryset = BookRecommendation.objects.all()
-        if number_of_books is not None:
-            queryset = queryset[:int(number_of_books)]
+
+        return queryset
+
+    def filter_queryset(self, queryset):
+        # Apply any filtering and ordering specified in the view
+        queryset = super().filter_queryset(queryset)
+
+        # Apply the limit last
+        limit = self.request.query_params.get('limit', None)
+        if limit is not None:
+            queryset = queryset[:int(limit)]
+
         return queryset
 
 # For updating existing entry and deleting a entry from database
