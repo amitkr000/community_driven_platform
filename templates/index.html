@@ -17,10 +17,12 @@
 
         .header h1{
             margin: .5rem 0.2rem 0 0;
+            font-size: 2rem;
         }
 
         .header p{
             margin-bottom: 1rem;
+            font-size: 1rem;
         }
 
         .navbar{
@@ -29,6 +31,7 @@
             align-items: center;
             text-align: center;
             cursor: pointer;
+            border-bottom: 1px solid black;
         }
 
         .navbar div{
@@ -39,18 +42,18 @@
 
         .navbar div.active{
             background-color: #F6E96B;
-            border-radius: .5rem;
+            border-radius: .5rem 0.5rem 0 0;
         }
 
         .navbar div p{
             text-decoration: none;
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             padding: 0 2rem;
             color: black;
         }
 
         .main{
-            margin: 1rem 2rem;
+            margin: 1rem 4rem;
         }
 
         .main #exploreSection .searchbar{
@@ -60,33 +63,34 @@
         }
 
         .main #exploreSection .searchbar select{
-            padding: .5rem;
+            padding: 1rem;
             width: 20%;
             font-size: 1rem;
             background-color: #387F39;
             color: white;
             border: none;
-            border-radius: .2rem;
+            border-radius: .5rem;
             cursor: pointer;
         }
 
         .main #exploreSection .searchbar input{
-            padding: .5rem;
+            padding: 1rem;
             font-size: 1rem;
-            margin: 0 1rem;
+            margin: 0 2rem;
             width: 100%;
             border: none;
             box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+            border-radius: .5rem;
         }
 
         .main #exploreSection .searchbar button{
-            padding: .5rem;
+            padding: 1rem;
             width: 20%;
             font-size: 1rem;
             background-color: #387F39;
             color: white;
             border: none;
-            border-radius: .2rem;
+            border-radius: .5rem;
             cursor: pointer;
         }
 
@@ -103,10 +107,15 @@
             align-items: center;
         }
 
+        #recommendationSection{
+            display: none;
+        }
+
         .book-card {
             width: 100%;
+            height: 400px;
             max-width: 1000px;
-            background-color: #fff;
+            background-color: #E5F9E0;
             border-radius: .5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -122,7 +131,8 @@
 
         .book-card .card-content {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
+            padding: 0 2rem;
         }
 
         .left-side {
@@ -141,6 +151,9 @@
         }
 
         .right-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             width: 100%;
             text-align: left;
         }
@@ -148,6 +161,11 @@
         .description {
             font-size: 1rem;
             margin-bottom: .8rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 9;
+            -webkit-box-orient: vertical;
         }
 
         .author,
@@ -159,23 +177,23 @@
         .interaction-buttons {
             margin-top: 1rem;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
+            gap: 1rem;
         }
 
         .book-card .card-content .right-side .interaction-buttons button {
             background-color:#387F39;
             color: white;
             border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
             cursor: pointer;
             transition: background-color 0.3s ease;
             flex: 1;
-            margin: 0 4px;
         }
 
         .book-card .card-content .right-side .interaction-buttons button:hover {
-            background-color: #A2CA71;
+            background-color: #50b052;
         }
 
         #load-btn{
@@ -191,6 +209,59 @@
             color: #fff;
             border: none;
         }
+
+        .filter-sort-container {
+            display: flex;
+            flex-direction: column;
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .filter-sort-container h3{
+            margin-right: 2rem;
+        }
+
+        .filter-container, .sort-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .filter-container label, .sort-container label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        select, input[type="date"] {
+            margin-right: 20px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button#apply-filters-sort {
+            align-self: flex-end;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button#apply-filters-sort:hover {
+            background-color: #0056b3;
+        }
+
+        .book-container {
+            margin-top: 20px;
+        }
+
+
     </style>
 </head>
 
@@ -225,7 +296,7 @@
                     <option value="subject">Category</option>
                     <option value="inpublisher">Publisher</option>
                 </select>
-                <input type="text" id="searchInput" placeholder="Search...">
+                <input type="text" id="searchInput" placeholder="Search the books..">
                 <button id="searchBtn">Search</button>
             </div>
 
@@ -241,6 +312,53 @@
     
         <!-- Recommendation Section -->
         <div id="recommendationSection" class="section">
+            <div class="filter-sort-container">
+                <!-- Filter Row -->
+                <div class="filter-container">
+                    <h3>Filter</h3>
+                    <label for="genre-select">Genre:</label>
+                    <select id="genre-select" class="filter-genre">
+                        <option value="all">All</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="non-fiction">Non-Fiction</option>
+                        <option value="mystery">Mystery</option>
+                        <option value="science">Science</option>
+                    </select>
+            
+                    <label for="rating-select">Rating:</label>
+                    <select id="rating-select" class="filter-rating">
+                        <option value="all">All</option>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4 Stars & Up</option>
+                        <option value="3">3 Stars & Up</option>
+                        <option value="2">2 Stars & Up</option>
+                        <option value="1">1 Star & Up</option>
+                    </select>
+            
+                    <label for="publication-date-select">Publication Date:</label>
+                    <input type="date" id="publication-date-select" class="filter-date">
+                </div>
+            
+                <!-- Sort Row -->
+                <div class="sort-container">
+                    <h3>Sort By</h3>
+                    <label for="sort-select">Sort By:</label>
+                    <select id="sort-select" class="sort-options">
+                        <option value="none">None</option>
+                        <option value="title">Title (A-Z)</option>
+                        <option value="-title">Title (Z-A)</option>
+                        <option value="author">Author (A-Z)</option>
+                        <option value="-author">Author (Z-A)</option>
+                        <option value="rating">Rating (Highest)</option>
+                        <option value="-rating">Rating (Lowest)</option>
+                        <option value="-date">Publication Date (Newest)</option>
+                        <option value="date">Publication Date (Oldest)</option>
+                    </select>
+                </div>
+            
+                <button id="apply-filters-sort">Apply Filters & Sort</button>
+            </div>
+            
             <div id="recommendationResults"></div>
         </div>
     </main>

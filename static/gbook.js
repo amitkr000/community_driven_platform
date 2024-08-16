@@ -57,11 +57,13 @@ $(document).ready(function(){
                                 </div>
 
                                 <div class="right-side">
-                                    <p class="description">${book.description}</p>
-                                    <p class="author">Author: <span>${book.authors.join(', ')}</span></p>
-                                    <p class="category">Category: <span>${book.categories.join(', ')}</span></p>
-                                    <p class="publisher">Publisher: <span>${book.publisher}</span></p>
-                                    <p class="published_date">Published Date: <span>${book.published_date}</span></p>
+                                    <div>
+                                        <p class="description">${book.description}</p>
+                                        <p class="author">Author: <span>${book.authors.join(', ')}</span></p>
+                                        <p class="category">Category: <span>${book.categories.join(', ')}</span></p>
+                                        <p class="publisher">Publisher: <span>${book.publisher}</span></p>
+                                        <p class="published_date">Published Date: <span>${book.published_date}</span></p>
+                                    </div>
                                     <div class="interaction-buttons">
                                         <button class="like-btn">Like</button>
                                         <button class="comment-btn">Comment</button>

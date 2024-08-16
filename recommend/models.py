@@ -11,6 +11,7 @@ class BookRecommendation(models.Model):
     description = models.TextField()
     genre = models.CharField(max_length=100)
     rating = models.FloatField(null=True, blank=True)
+    publisher = models.CharField(max_length=255, null=True, blank=True)
     publication_date = models.DateField(null=True, blank=True)
     cover_image = models.URLField(blank=True)
     # recommended_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recommendations')
