@@ -84,7 +84,7 @@ $(document).ready(function() {
             $('#recommendationResults').empty(); // Clear previous results
 
             var results = ''
-            
+
             if (data.length == 0){
                 results += `<h2>Sorry there is no result</h2>`
             }
@@ -106,11 +106,6 @@ $(document).ready(function() {
                                 <p class="category">Category: <span>${book.genre}</span></p>
                                 <p class="publisher">Publisher: <span>${book.publisher}</span></p>
                                 <p class="published_date">Published Date: <span>${book.publication_date}</span></p>
-                            </div>
-                            <div class="interaction-buttons">
-                                <button class="like-btn">Like</button>
-                                <button class="comment-btn">Comment</button>
-                                <button id = "recommend-btn" class="recommend-btn">Recommend</button>
                             </div>
                         </div>
                     </div>
