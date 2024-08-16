@@ -1,0 +1,362 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    text-align: center;
+    padding: .5rem;
+    color: #387F39;
+}
+
+.header h1{
+    margin: .5rem 0.2rem 0 0;
+    font-size: 2rem;
+}
+
+.header p{
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.header #loginButton{
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.header #userGreeting{
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    padding: 10px 20px;
+    border: none;
+    text-align: center;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+#dropdownContainer {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 300px;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+#profileImage {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#greetingText {
+    font-size: 1rem;
+    margin-right: 1rem;
+    color: #333;
+}
+
+.tab {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.tab button {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 50%;
+}
+
+.tab button.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.dropdown-content form {
+    display: none;
+    margin-top: 10px;
+}
+
+.dropdown-content form.active {
+    display: block;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid black;
+}
+
+.navbar div{
+    padding: .5rem;
+    background-color: white;
+    color: black;
+}
+
+.navbar div.active{
+    background-color: #F6E96B;
+    border-radius: .5rem 0.5rem 0 0;
+}
+
+.navbar div p{
+    text-decoration: none;
+    font-size: 1.5rem;
+    padding: 0 2rem;
+    color: black;
+}
+
+.main{
+    margin: 1rem 4rem;
+}
+
+.main #exploreSection .searchbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main #exploreSection .searchbar select{
+    padding: 1rem;
+    width: 20%;
+    font-size: 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.main #exploreSection .searchbar input{
+    padding: 1rem;
+    font-size: 1rem;
+    margin: 0 2rem;
+    width: 100%;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    border-radius: .5rem;
+}
+
+.main #exploreSection .searchbar button{
+    padding: 1rem;
+    width: 20%;
+    font-size: 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.main #exploreSection .searchbar button:hover{
+    background-color: #F6E96B;
+    color: black;
+}
+
+.main #exploreSection #exploreResults{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#recommendationSection{
+    display: none;
+}
+
+.main #recommendationSection #recommendationResults{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-card {
+    width: 100%;
+    height: 400px;
+    max-width: 1000px;
+    background-color: #E5F9E0;
+    border-radius: .5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.book-card .book-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.book-card .card-content {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0 2rem;
+}
+
+.left-side {
+    text-align: center;
+}
+
+.book-image {
+    width: 10rem;
+    height: auto;
+    border-radius: 1rem;
+}
+
+.rating {
+    margin-top: .8rem;
+    font-size: 1.25rem;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    text-align: left;
+}
+
+.description {
+    font-size: 1rem;
+    margin-bottom: .8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 9;
+    -webkit-box-orient: vertical;
+}
+
+.author,
+.category,.publisher, .published_date {
+    font-size: 1rem;
+    margin-bottom: .5rem;
+}
+
+.interaction-buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+
+.book-card .card-content .right-side .interaction-buttons button {
+    background-color:#4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1;
+}
+
+.book-card .card-content .right-side .interaction-buttons button:hover {
+    background-color: #50b052;
+}
+
+#load-btn{
+    text-align: center;
+    display: none;
+}
+
+#load-btn button{
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: .2rem;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+}
+
+.filter-sort-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.filter-sort-container h3{
+    margin-right: 2rem;
+}
+
+.filter-container, .sort-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.filter-container label, .sort-container label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+select, input[type="date"] {
+    margin-right: 20px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button#apply-filters-sort {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button#apply-filters-sort:hover {
+    background-color: #0056b3;
+}
+
+.book-container {
+    margin-top: 20px;
+}
