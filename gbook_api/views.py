@@ -10,7 +10,7 @@ class BookSearchView(APIView):
     def get(self, request, format=None):
         query = request.query_params.get('q', '')
         startIndex = request.query_params.get('i', '')
-        print(startIndex)
+        # print(startIndex)
         query = query.split()
         query = '+'.join(query)
         print(query)

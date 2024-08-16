@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_view, name='index'),
     path('api/books/', include('gbook_api.urls')),
+    path('api/recommend/', include('recommend.urls')),
 ]

@@ -12,7 +12,8 @@ $(document).ready(function(){
         else{
             query = search;
         }
-        fetchExploreData(query, startindex, 'load'); // Fetch explore data based on the query
+        // Fetch explore data based on the query
+        fetchExploreData(query, startindex, 'load');
     }
     )
 
@@ -28,7 +29,8 @@ $(document).ready(function(){
             query = search;
         }
         let startindex = 0;
-        fetchExploreData(query, startindex, 'new-search'); // Fetch explore data based on the query
+        // Fetch explore data based on the query
+        fetchExploreData(query, startindex, 'new-search'); 
     });
 
     // Function to fetch explore data from the server
@@ -51,19 +53,19 @@ $(document).ready(function(){
                             <div class="card-content">
                                 <div class="left-side">
                                     <img src=${book.cover_image ? book.cover_image : "https://via.placeholder.com/160"} alt="Book Cover" class="book-image">
-                                    <p class="rating">Rating: ${book.rating}</p>
+                                    <p class="rating">Rating: <span>${book.rating}</span>$</p>
                                 </div>
 
                                 <div class="right-side">
                                     <p class="description">${book.description}</p>
-                                    <p class="author">Author: ${book.authors.join(', ')}</p>
-                                    <p class="category">Category: ${book.categories.join(', ')}</p>
-                                    <p class="publisher">Publisher: ${book.publisher}</p>
-                                    <p class="published_date">Published Date: ${book.published_date}</p>
+                                    <p class="author">Author: <span>${book.authors.join(', ')}</span></p>
+                                    <p class="category">Category: <span>${book.categories.join(', ')}</span></p>
+                                    <p class="publisher">Publisher: <span>${book.publisher}</span></p>
+                                    <p class="published_date">Published Date: <span>${book.published_date}</span></p>
                                     <div class="interaction-buttons">
                                         <button class="like-btn">Like</button>
                                         <button class="comment-btn">Comment</button>
-                                        <button class="recommend-btn">Recommend</button>
+                                        <button id = "recommend-btn" class="recommend-btn">Recommend</button>
                                     </div>
                                 </div>
                             </div>
@@ -78,5 +80,10 @@ $(document).ready(function(){
         }
         });
     }
+
+
+
+
+
 
 });

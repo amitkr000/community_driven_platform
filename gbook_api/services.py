@@ -13,7 +13,7 @@ def fetch_books_from_google(query, startIndex, max_results=10):
     
     try:
         # Set a timeout of 5 seconds
-        response = session.get(url, timeout=5) 
+        response = session.get(url, timeout=5)
         
         # Raises HTTPError for bad responses (4xx and 5xx)
         response.raise_for_status()  
@@ -49,9 +49,9 @@ def process_book_data(raw_data):
             'description': volume_info.get('description', 'No Description'),
             'cover_image': volume_info.get('imageLinks', {}).get('thumbnail', ''),
             'categories' : volume_info.get('categories', ['Unknown categories']),
-            'rating': volume_info.get('averageRating', 'No Rating'),
+            'rating': volume_info.get('averageRating', 0),
             'publisher': volume_info.get('publisher', 'Unknown'),
-            'published_date': volume_info.get('publishedDate', 'No Date')
+            'published_date': volume_info.get('publishedDate', None)
             
         }
         books.append(book)
