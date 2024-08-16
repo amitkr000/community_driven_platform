@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from .models import BookRecommendation, Like, Comment
 from .serializers import BookRecommendationSerializer, LikeSerializer, CommentSerializer
 
+# For creating new book entries in database
 class BookRecommendationListCreateView(generics.ListCreateAPIView):
     queryset = BookRecommendation.objects.all()
     serializer_class = BookRecommendationSerializer
@@ -16,7 +17,19 @@ class BookRecommendationListCreateView(generics.ListCreateAPIView):
         print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class BookRecommendationDetailView(generics.RetrieveUpdateDestroyAPIView):
+# For Retriving book data from database
+class BookRecommendationListView(generics.ListAPIView):
+    serializer_class = BookRecommendationSerializer
+
+    def get_queryset(self):
+        number_of_books = self.request.query_params.get('limit', None)
+        queryset = BookRecommendation.objects.all()
+        if number_of_books is not None:
+            queryset = queryset[:int(number_of_books)]
+        return queryset
+
+# For updating existing entry and deleting a entry from database
+class BookRecommendationUpdateView(generics.RetrieveUpdateDestroyAPIView):
     queryset = BookRecommendation.objects.all()
     serializer_class = BookRecommendationSerializer
 

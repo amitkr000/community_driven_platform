@@ -36,7 +36,7 @@ $(document).ready(function(){
     // Function to fetch explore data from the server
     function fetchExploreData(query, startindex, action) {
         $.ajax({
-        url: '/api/books/search/', // Replace with your server endpoint
+        url: '/api/gbooks/search/', // Replace with your server endpoint
         method: 'GET',
         data: { q: query, i: startindex },
         success: function(data) {

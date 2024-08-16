@@ -1,7 +1,5 @@
 $(document).ready(function() {
     $('#exploreResults').on('click', '.recommend-btn', function() {
-
-        console.log("hello");
         // Get the specific book
         var card = $(this).closest('.book-card');
 
@@ -26,7 +24,7 @@ $(document).ready(function() {
 
         // Send the data to the server using AJAX
         $.ajax({
-            url: '/api/recommend/recommendations/',
+            url: '/api/recommend/add-book/',
             method: 'POST',
             data: data,
             success: function(response) {

@@ -1,14 +1,16 @@
 from django.urls import path
 from .views import (
     BookRecommendationListCreateView,
-    BookRecommendationDetailView,
+    BookRecommendationListView,
+    BookRecommendationUpdateView,
     LikeCreateView,
     CommentListCreateView
 )
 
 urlpatterns = [
-    path('recommendations/', BookRecommendationListCreateView.as_view(), name='recommendation-list'),
-    path('recommendations/<int:pk>/', BookRecommendationDetailView.as_view(), name='recommendation-detail'),
+    path('add-book/', BookRecommendationListCreateView.as_view(), name='recommendation-list'),
+    path('retrive/', BookRecommendationListView.as_view()),
+    path('update/<int:pk>/', BookRecommendationUpdateView.as_view(), name='recommendation-detail'),
     path('recommendations/<int:pk>/like/', LikeCreateView.as_view(), name='like-create'),
     path('recommendations/<int:pk>/comments/', CommentListCreateView.as_view(), name='comment-list-create'),
 ]
