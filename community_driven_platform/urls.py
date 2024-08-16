@@ -23,4 +23,5 @@ urlpatterns = [
     path('', index_view, name='index'),
     path('api/gbooks/', include('gbook_api.urls')),
     path('api/recommend/', include('recommend.urls')),
+    path('api/auth/', include('authentication.urls')),
 ]
