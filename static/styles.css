@@ -4,10 +4,23 @@
     padding: 0;
 }
 
+:root{
+    --primary-color: #007BFF;
+    --primary-hover-color: #2e93ff;
+    --secondary-color: #4CAF50;
+    --ternary-color: #ffcc00;
+    --font-size: 1rem;
+    --padding: 1rem;
+    --half-padding: 1rem;
+}
+
+
+/* Header --------------------------------------------------------*/
+
 .header{
     text-align: center;
     padding: .5rem;
-    color: #387F39;
+    color: var(--secondary-color);
 }
 
 .header h1{
@@ -17,19 +30,39 @@
 
 .header p{
     margin-bottom: 1rem;
-    font-size: 1rem;
+    color: black;
+    font-size: var(--font-size);
+}
+
+
+/* Login/Registration form ------------------------ */
+
+.header #loginButton{
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
 }
 
 .header #loginButton{
     position: absolute;
     right: 2rem;
     top: 2rem;
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: .5rem;
     cursor: pointer;
+}
+
+.header #loginButton:hover{
+    background-color: var(--primary-hover-color);
 }
 
 .header #userGreeting{
@@ -88,7 +121,7 @@
 }
 
 .tab button.active {
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
 }
 
@@ -101,21 +134,29 @@
     display: block;
 }
 
-input[type="text"], input[type="password"], input[type="email"] {
+#dropdownContainer h3{
+    color: var(--secondary-color);
+}
+
+#dropdownContainer input[type="text"], input[type="password"], input[type="email"] {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     box-sizing: border-box;
 }
 
-button[type="submit"] {
-    background-color: #4CAF50;
+#dropdownContainer button[type="submit"] {
+    background-color: var(--primary-color);
     color: white;
     padding: 10px;
     width: 100%;
     border: none;
     cursor: pointer;
 }
+
+
+
+/* NavBar --------------------------------------------------------*/
 
 .navbar{
     display: grid;
@@ -133,7 +174,8 @@ button[type="submit"] {
 }
 
 .navbar div.active{
-    background-color: #F6E96B;
+    background-color: var(--secondary-color);
+    color: #fff;
     border-radius: .5rem 0.5rem 0 0;
 }
 
@@ -144,10 +186,14 @@ button[type="submit"] {
     color: black;
 }
 
+
+/* Main --------------------------------------------------------*/
+
 .main{
     margin: 1rem 4rem;
 }
 
+/* Explore section ----------------------- */
 .main #exploreSection .searchbar{
     display: flex;
     justify-content: center;
@@ -158,7 +204,7 @@ button[type="submit"] {
     padding: 1rem;
     width: 20%;
     font-size: 1rem;
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: .5rem;
@@ -179,7 +225,7 @@ button[type="submit"] {
     padding: 1rem;
     width: 20%;
     font-size: 1rem;
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: .5rem;
@@ -187,114 +233,22 @@ button[type="submit"] {
 }
 
 .main #exploreSection .searchbar button:hover{
-    background-color: #F6E96B;
-    color: black;
+    background-color: var(--primary-hover-color);
 }
 
-.main #exploreSection #exploreResults{
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
-#recommendationSection{
+/* Recomend section ----------------------- */
+.main #recommendationSection{
     display: none;
 }
 
-.main #recommendationSection #recommendationResults{
+/* .main #recommendationSection #recommendationResults{
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.book-card {
-    width: 100%;
-    height: 400px;
-    max-width: 1000px;
-    background-color: #E5F9E0;
-    border-radius: .5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    padding: 1rem;
-    margin: 1rem 0;
-}
-
-.book-card .book-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.book-card .card-content {
-    display: flex;
-    gap: 1.5rem;
-    padding: 0 2rem;
-}
-
-.left-side {
-    text-align: center;
-}
-
-.book-image {
-    width: 10rem;
-    height: auto;
-    border-radius: 1rem;
-}
-
-.rating {
-    margin-top: .8rem;
-    font-size: 1.25rem;
-}
-
-.right-side {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    text-align: left;
-}
-
-.description {
-    font-size: 1rem;
-    margin-bottom: .8rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 9;
-    -webkit-box-orient: vertical;
-}
-
-.author,
-.category,.publisher, .published_date {
-    font-size: 1rem;
-    margin-bottom: .5rem;
-}
-
-.interaction-buttons {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-evenly;
-    gap: 1rem;
-}
-
-.book-card .card-content .right-side .interaction-buttons button {
-    background-color:#4CAF50;
-    color: white;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex: 1;
-}
-
-.book-card .card-content .right-side .interaction-buttons button:hover {
-    background-color: #50b052;
-}
+} */
 
 #load-btn{
     text-align: center;
@@ -305,9 +259,13 @@ button[type="submit"] {
     padding: .5rem 1rem;
     font-size: 1rem;
     border-radius: .2rem;
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: #fff;
     border: none;
+}
+
+#load-btn button:hover{
+    background-color: var(--primary-hover-color);
 }
 
 .filter-sort-container {
@@ -345,7 +303,7 @@ select, input[type="date"] {
 button#apply-filters-sort {
     align-self: flex-end;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 4px;
@@ -354,9 +312,198 @@ button#apply-filters-sort {
 }
 
 button#apply-filters-sort:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-hover-color);
 }
 
-.book-container {
-    margin-top: 20px;
+
+
+
+
+
+/* Books results for both recommend/explore-------------------------- */
+
+#exploreResults, #recommendationResults {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+.book-card {
+    width: 100%;
+    max-width: calc(20% - 20px); /* 5 cards per row minus the gap */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+.card-content {
+    flex-grow: 1;
+    position: relative;
+}
+
+.card-front, .card-back {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.card-back {
+    display: none;
+}
+
+.card-content:hover .card-front {
+    display: none;
+}
+
+.card-content:hover .card-back {
+    display: flex;
+}
+
+.book-cover {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.book-title {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.book-rating {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.star {
+    font-size: 20px;
+    color: #ccc; /* Grey color for inactive stars */
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.star.active {
+    color: var(--ternary-color); /* Golden color for active stars */
+}
+
+.book-author, .book-genre, .book-publication-date, .book-publisher {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: var(--secondary-color);
+    text-align: left;
+    width: 100%;
+}
+
+.book-description {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
+    text-align: left;
+    width: 100%;
+    line-height: 1.4em; /* Set consistent line height */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 10; /* Limit to 5 lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-icons {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+}
+
+.card-icons i {
+    font-size: 20px;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.card-icons i:hover {
+    color: var(--primary-hover-color);
+}
+
+@media (max-width: 1200px) {
+    .book-card {
+        max-width: calc(25% - 20px); /* 4 cards per row */
+    }
+}
+
+@media (max-width: 992px) {
+    .book-card {
+        max-width: calc(33.33% - 20px); /* 3 cards per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .book-card {
+        max-width: calc(50% - 20px); /* 2 cards per row */
+    }
+}
+
+@media (max-width: 576px) {
+    .book-card {
+        max-width: 100%; /* 1 card per row */
+    }
+}
+
+
+
+
+
+
+.fadeout-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(62, 62, 62, 0.8);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+
+.auth-popup-content {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    z-index: 1000;
+    text-align: center;
 }

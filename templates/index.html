@@ -4,6 +4,8 @@
     {% load static %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 
 <body>
@@ -12,10 +14,12 @@
         <h1>Community driven platform</h1>
         <p>Place to share and explore book recommendations</p>
         <button id="loginButton">Login</button>
+
         <div id="userGreeting" class="hidden">
             <span id="greetingText"></span>
             <img id="profileImage" src="" alt="Profile" />
         </div>
+
         <div id="dropdownContainer" class="dropdown-content">
             <div class="tab">
                 <button id="loginTab" class="active">Login</button>
@@ -127,6 +131,16 @@
         </div>
     </main>
 
+    <footer>
+        <div class="fadeout-popup" id="fadeout-popup">
+            This feature is under development
+        </div>
+
+        <div class="auth-popup-content" id="auth-popup-content">
+            Please log in or register to recommend a book.
+        </div>
+    </footer>
+
     <script>
     $(document).ready(function(){
 
@@ -198,8 +212,6 @@
                     // Handle successful login (e.g., redirect, update UI)
                 },
                 error: function(xhr, status, error) {
-                    storeToken(response.token);
-                    updateUIAfterLoginOrRegister(loginData.username);
                     alert('Login failed: ' + xhr.responseText);
                     // Handle login failure (e.g., show error message)
                 }
@@ -233,17 +245,16 @@
 
         function storeToken(token) {
             // Store the token in localStorage
-            localStorage.setItem('authToken', token);
+            sessionStorage.setItem('authToken', token);
         }
 
         function updateUIAfterLoginOrRegister(username) {
             $('#dropdownContainer').hide();
-            $('#loginButton').hide(); // Hide the login button
-            $('#userGreeting').removeClass('hidden'); // Show the greeting
-            $('#greetingText').text('Hi, ' + username); // Set the greeting text
+            $('#loginButton').hide();
+            $('#userGreeting').removeClass('hidden');
+            $('#greetingText').text('Hi, ' + username);
 
-            // Optionally update the profile image source
-            $('#profileImage').attr('src', 'https://placehold.co/32.png'); // Replace with actual image path
+            $('#profileImage').attr('src', 'https://placehold.co/32.png');
         }
 
     });

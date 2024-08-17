@@ -1,4 +1,4 @@
-from rest_framework import generics, status
+from rest_framework import generics, status, permissions
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework.response import Response
@@ -9,6 +9,7 @@ from .serializers import BookRecommendationSerializer, LikeSerializer, CommentSe
 class BookRecommendationListCreateView(generics.ListCreateAPIView):
     queryset = BookRecommendation.objects.all()
     serializer_class = BookRecommendationSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

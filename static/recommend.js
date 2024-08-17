@@ -1,46 +1,65 @@
 $(document).ready(function() {
     $('#exploreResults').on('click', '.recommend-btn', function() {
 
-        // Get the specific book
-        var card = $(this).closest('.book-card');
+        // Check if the user is authenticated
+        var token = sessionStorage.getItem('authToken');
 
-        const id = card.data('id');
-        const title = card.find('.book-title').text();
-        const author = card.find('.author span').text();
-        const description = card.find('.description').text();
-        const genre = card.find('.category span').text();
-        const rating = card.find('.rating span').text();
-        const publisher = card.find('.publisher span').text();
-        const publication_date = card.find('.published_date span').text() == 'null' ? null : formatDate(card.find('.published_date span').text());
-        const cover_image = card.find('.book-image').attr('src');
+        if (!token) {
+            // Show the authentication pop-up if no token is present
+            $('#auth-popup-content').css('visibility', 'visible').css('opacity', '1');
+            setTimeout(function() {
+                $('#auth-popup-content').css('opacity', '0').css('visibility', 'hidden');
+            }, 1000);
+        }
 
-        var data = {
-            id: id,
-            title: title,
-            author: author,
-            description: description,
-            genre: genre,
-            rating: rating,
-            publication_date: publication_date,
-            cover_image: cover_image,
-            // recommended_by: 1  // Assuming the user ID is 1 for now, adjust as needed
-        };
+        else{
+            console.log(token);
+            // Get the specific book
+            var card = $(this).closest('.book-card');
 
-        // Send the data to the server using AJAX
-        $.ajax({
-            url: '/api/recommend/add-book/',
-            method: 'POST',
-            data: data,
-            success: function(response) {
-                card.find('.recommend-btn').css('background-color', '#F6E96B').attr('disabled', true);
-                // Handle the server response here
-                console.log('Server response:', response);
-            },
-            error: function(error) {
-                // Handle errors here
-                console.error('Error:', error);
-            }
-        });
+            const id = card.data('id');
+            const title = card.find('.book-title').text();
+            const author = card.find('.book-author span').text();
+            const description = card.find('.book-description').text();
+            const genre = card.find('.book-genre span').text();
+            const rating = card.find('.book-rating span').data('id');
+            const publisher = card.find('.book-publisher span').text();
+            const publication_date = card.find('.book-publication-date span').text() == 'null' ? null : formatDate(card.find('.book-publication-date span').text());
+            const cover_image = card.find('.book-cover').attr('src');
+
+            var data = {
+                id: id,
+                title: title,
+                author: author,
+                description: description,
+                genre: genre,
+                rating: rating,
+                publication_date: publication_date,
+                cover_image: cover_image,
+                // recommended_by: 1  // Assuming the user ID is 1 for now, adjust as needed
+            };
+
+            // Send the data to the server using AJAX
+            $.ajax({
+                url: '/api/recommend/add-book/',
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Token ' + token,
+                },
+                data: data,
+                success: function(response) {
+                    card.find('.recommend-btn').css('color', '#ffcc00').attr('disabled', true);
+                    // Handle the server response here
+                    console.log('Server response:', response);
+                },
+                error: function(error) {
+                    // Handle errors here
+                    console.error('Error:', error);
+                }
+            });
+
+        }
+
     });
 
     function formatDate(dateStr) {
@@ -67,7 +86,7 @@ $(document).ready(function() {
         fetchRecommendData();
     });
 
-    // Function to fetch recommed data from the server
+    // Function to fetch recommeded books from the server
     function fetchRecommendData() {
 
         var genre = $('#genre-select').val() == 'all' ? '' : $('#genre-select').val();
@@ -92,27 +111,43 @@ $(document).ready(function() {
             data.forEach(function(book) {
                 results += `
                 <div class="book-card" data-id="${book.id}">
-                    <h2 class="book-title">${book.title}</h2>
                     <div class="card-content">
-                        <div class="left-side">
-                            <img src=${book.cover_image ? book.cover_image : "https://via.placeholder.com/160"} alt="Book Cover" class="book-image">
-                            <p class="rating">Rating: <span>${book.rating}</span>$</p>
+                        <div class="card-front">
+                            <img src="${book.cover_image ? book.cover_image : "https://via.placeholder.com/160"}" alt="Book Cover" class="book-cover">
+                            <h3 class="book-title">${book.title}</h3>
+                            <p class="book-rating" data-id='${book.rating}'>
+                                <span class="star" data-value="1">&#9733;</span>
+                                <span class="star" data-value="2">&#9733;</span>
+                                <span class="star" data-value="3">&#9733;</span>
+                                <span class="star" data-value="4">&#9733;</span>
+                                <span class="star" data-value="5">&#9733;</span>
+                            </p>
                         </div>
-
-                        <div class="right-side">
-                            <div>
-                                <p class="description">${book.description}</p>
-                                <p class="author">Author: <span>${book.author}</span></p>
-                                <p class="category">Category: <span>${book.genre}</span></p>
-                                <p class="publisher">Publisher: <span>${book.publisher}</span></p>
-                                <p class="published_date">Published Date: <span>${book.publication_date}</span></p>
-                            </div>
+                        <div class="card-back">
+                            <p class="book-description">${book.description}</p>
+                            <p class="book-author">Author: <span>${book.authors}</span></p>
+                            <p class="book-genre">Genre: <span>${book.categories}</span></p>
+                            <p class="book-publication-date">Published: <span>${book.publisher}</span></p>
+                            <p class="book-publisher">Publisher: <span>${book.publisher}</span></p>
                         </div>
                     </div>
                 </div>
                 `
             });
+
             $('#recommendationResults').append(results);
+
+            $('.book-card').each(function() {
+                var rating = $(this).find('.book-rating').data('id');
+                var $stars = $(this).find('.star');
+                $stars.each(function() {
+                    var value = $(this).data('value');
+                    if (value <= rating) {
+                        $(this).addClass('active');
+                    }
+                });
+            });
+
         },
         error: function() {
             $('#results').html('<p>An error occurred while fetching data.</p>');
