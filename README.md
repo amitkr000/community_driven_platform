@@ -66,6 +66,7 @@ DEBUG=True
 ### 5. Apply Migrations
 
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
 
