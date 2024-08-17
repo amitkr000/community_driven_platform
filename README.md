@@ -78,6 +78,8 @@ python manage.py runserver
 
 Visit `http://127.0.0.1:8000/` in your browser to access the application.
 
+![Screenshot 2024-08-17 183337](https://github.com/user-attachments/assets/4ee9e4aa-aa44-4e20-90b2-cff01c28ac58)
+
 ## API Endpoints
 
 ### Google Books API Integration
