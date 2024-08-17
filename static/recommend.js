@@ -22,7 +22,7 @@ $(document).ready(function() {
             const author = card.find('.book-author span').text();
             const description = card.find('.book-description').text();
             const genre = card.find('.book-genre span').text();
-            const rating = card.find('.book-rating span').data('id');
+            const rating = card.find('.book-rating').data('id');
             const publisher = card.find('.book-publisher span').text();
             const publication_date = card.find('.book-publication-date span').text() == 'null' ? null : formatDate(card.find('.book-publication-date span').text());
             const cover_image = card.find('.book-cover').attr('src');
@@ -34,6 +34,7 @@ $(document).ready(function() {
                 description: description,
                 genre: genre,
                 rating: rating,
+                publisher: publisher,
                 publication_date: publication_date,
                 cover_image: cover_image,
                 // recommended_by: 1  // Assuming the user ID is 1 for now, adjust as needed
@@ -49,8 +50,18 @@ $(document).ready(function() {
                 data: data,
                 success: function(response) {
                     card.find('.recommend-btn').css('color', '#ffcc00').attr('disabled', true);
-                    // Handle the server response here
+
                     console.log('Server response:', response);
+
+                    const $popup = $('#recommend-popup-content');
+                    // Show the pop-up
+                    $popup.css('visibility', 'visible').css('opacity', '1');
+                
+                    // Hide the pop-up after 3 seconds
+                    setTimeout(function() {
+                        $popup.css('opacity', '0').css('visibility', 'hidden');
+                    }, 1000);
+
                 },
                 error: function(error) {
                     // Handle errors here
