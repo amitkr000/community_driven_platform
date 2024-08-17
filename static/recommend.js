@@ -125,9 +125,9 @@ $(document).ready(function() {
                         </div>
                         <div class="card-back">
                             <p class="book-description">${book.description}</p>
-                            <p class="book-author">Author: <span>${book.authors}</span></p>
-                            <p class="book-genre">Genre: <span>${book.categories}</span></p>
-                            <p class="book-publication-date">Published: <span>${book.publisher}</span></p>
+                            <p class="book-author">Author: <span>${book.author}</span></p>
+                            <p class="book-genre">Genre: <span>${book.genre}</span></p>
+                            <p class="book-publication-date">Published: <span>${book.publication_date}</span></p>
                             <p class="book-publisher">Publisher: <span>${book.publisher}</span></p>
                         </div>
                     </div>
