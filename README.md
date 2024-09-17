@@ -4,6 +4,10 @@
 
 This project is a Django-based Book Recommendation System that integrates with the Google Books API and includes user authentication, book recommendations, and user interactions like likes and comments. This guide provides setup instructions, API endpoint details, usage examples, and information about external dependencies.
 
+
+https://github.com/user-attachments/assets/84e0ac1d-bf0e-4d55-8430-62a2eeb34c8d
+
+
 ## Table of Contents
 
 1. [Setup Instructions](#setup-instructions)
